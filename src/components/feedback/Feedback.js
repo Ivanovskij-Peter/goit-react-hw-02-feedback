@@ -1,46 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { getStart } from '../statistic/Statistics';
 
-const initialState = {
-  good: 0,
-  neutral: 0,
-  bad: 0,
-  total: 0,
-};
-
-export class Feedback extends Component {
-  state = { ...initialState };
-  addFeedback = e => {
-    const name = e.target.name;
-    this.setState(prevState => {
-      return { [name]: prevState[name] + 1 };
-    });
+const Feedback = ({ options, onLeaveFeedback }) => {
+  const checkBtn = event => {
+    getStart(true);
+    onLeaveFeedback(event.target.name);
   };
-  countTotalFeedback() {
-    return;
-  }
-
-  reset = () => {
-    this.setState(initialState);
-  };
-  render() {
-    return (
+  return (
+    <>
       <div>
-        <h2>Please leave feedback</h2>
-        <button name="good" onClick={this.addFeedback}>
-          Good
-        </button>
-        <button name="neutral" onClick={this.addFeedback}>
-          Neutral
-        </button>
-        <button name="bad" onClick={this.addFeedback}>
-          Bad
-        </button>
-        <span>Good:{this.state.good}</span>
-        <span>Neutral:{this.state.neutral}</span>
-        <span>Bad:{this.state.bad}</span>
-        <span>Total:{this.countTotalFeedback}</span>
-        <span>Positive feedback:{}%</span>
+        {Object.keys(options).map(element => (
+          <button onClick={checkBtn} key={element} name={element}></button>
+        ))}
       </div>
-    );
-  }
-}
+    </>
+  );
+};
+export default Feedback;
