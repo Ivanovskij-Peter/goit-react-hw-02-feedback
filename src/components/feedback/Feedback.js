@@ -10,7 +10,9 @@ const Feedback = ({ options, onLeaveFeedback }) => {
     <>
       <div>
         {Object.keys(options).map(element => (
-          <button onClick={checkBtn} key={element} name={element}></button>
+          <button onClick={checkBtn} key={element} name={element}>
+            {element}
+          </button>
         ))}
       </div>
     </>
